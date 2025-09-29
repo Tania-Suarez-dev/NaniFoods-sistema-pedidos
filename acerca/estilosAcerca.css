@@ -1,0 +1,50 @@
+
+.principalAcerca{
+    background-color: white;
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.foto{
+    height: 300px;
+    width: 300px;
+    border: 1px solid gray;
+    opacity: 70%;
+}
+.foto:hover{
+    opacity: 100%;
+}
+.contenidoTexto{
+    height: 300px;
+    width: 350px;
+    border: 1px solid gray;
+    opacity: 70%;
+}
+.contenidoTexto:hover{
+    opacity: 100%;
+}
+.nombre{
+    margin-top: 10px;
+    font-size: 35px;
+    font-family: "Fredoka", serif;
+}
+.direccion{
+    padding: 5px;
+    font-size: 20 px;
+}
+.correo{
+    padding: 5px;
+    font-size: 20px;
+}
+.telefono{
+    padding: 5px;
+    font-size: 20px;
+}
+.imagen{
+    padding: 5px;
+    width : 60px;
+    height: 60px;
+}

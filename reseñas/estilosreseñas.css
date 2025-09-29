@@ -1,0 +1,30 @@
+.principal{
+    display: flex;
+}
+
+.filtros {    
+    min-height: 85vh;
+    width: 20%;
+    background-color: var(--color4);
+    box-shadow: 1px 0px 5px var(--color4);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: auto;
+}
+.apartado{
+    display: block;
+    margin: 25px;
+    width: 13vw;
+}
+.reseñas{
+    height: 85vh;
+    width: 80%;
+    background-color: var(--color5);
+}
+
+.reseñas {
+    height: auto;
+    width: 80%;
+    background-color: var(--color5);
+}

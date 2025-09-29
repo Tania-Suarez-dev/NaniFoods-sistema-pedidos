@@ -1,0 +1,123 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.principalLogin {
+    width: 100%;
+    padding: 5%;
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../img/test1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+ul {
+    padding-left: 2rem;
+}
+
+.login {
+    margin: auto;
+    border: 3px solid var(--color1);
+    border-radius: 10px;
+    width: 400px;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: var(--color3);
+    overflow-y: auto;
+}
+
+.login:focus-within {
+    transition: 0.1s;
+    border: 5px solid var(--color1);
+}
+
+.lineatexto {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textologin {
+    text-align: center;
+    font-family: "Fredoka", serif;
+    font-size: 2rem;
+}
+
+.campotext {
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 2px;
+    border: none;
+    padding: 5px;
+    background-color: var(--color3);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 40px;
+    font-size: 15px;
+}
+
+.campotext:focus {
+    transition: 0.5s;
+    background-color: var(--color6);
+}
+
+.formulario {
+    position: static;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.botonlog {
+    border: none;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 35px;
+    color: var(--color3);
+    background-color: var(--color1);
+    border-radius: 2px;
+    margin-top: 20px;
+}
+
+.botonlog:hover {
+    transition: 0.3s;
+    color: var(--color1);
+    background-color: var(--color2);
+}
+
+.botonlog:focus {
+    transition: 1s;
+    color: darkslategrey;
+    background-color: var(--color2);
+}
+
+.recordar {
+    padding-top: 5%;
+    padding-left: 5%;
+}
+
+.alert {
+    padding: 15px 20px;
+    margin-top: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.alert-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}

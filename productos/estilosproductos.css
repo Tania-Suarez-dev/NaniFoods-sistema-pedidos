@@ -1,0 +1,61 @@
+html,
+body {
+    height: auto;
+    width: 100;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x:hidden !important;
+}
+
+.principalcarta {
+    display: flex;
+    width: 100vw;
+    align-items: flex-start;
+    height: auto;
+    overflow: visible;
+    align-items: stretch;
+}
+
+.filtros {
+    width: 20%;
+    background-color: var(--color4);
+    box-shadow: 1px 0px 5px var(--color4);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.productos {
+    background-color: var(--color5);
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    overflow-y: visible;
+}
+
+.card {
+    margin: 15px;
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+#modal-product-content {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+#modal-product-image img {
+    max-height: 70vh;
+    object-fit: cover;
+    margin: 10px;
+}
+
+#modal-product-description {
+    margin: 10px;
+    width: 50%;
+}
