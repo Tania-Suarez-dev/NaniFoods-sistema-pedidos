@@ -28,48 +28,24 @@ $filaprecio = $resultadoprecio->fetch_assoc()
 </head>
 
 <body>
-  <header>
-    <div class="logo">
-      <a href="../index/index.php">
+ <header>
+   <div class="logo">
+    <a href="../index/index.php">
         <img src="../img/logo.png" alt="Logo" class="logo">
-      </a>
-    </div>
+    </a>
+</div>
     <div class="navegador">
       <ul>
-        <?php
-        if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== "admin") {
-          echo
-          "<li><a id='inicio' class='nav-items' href='../index/index.php'>Inicio</a></li>
-                <li><a class='nav-items' href='../productos/productos.php'>Carta</a></li>
-                <li><a class='nav-items' href=''>Domicilios</a></li>
-                <li><a class='nav-items' href='../reseñas/reseñas.php'>Reseñas</a></li>
-                <li><a class='nav-items' href='../acerca/acerca.php'>Acerca de</a></li>";
-        } elseif ($_SESSION["rol"] === "admin") {
-          echo
-          "<li><a id='inicio' class='nav-items' href='../index/index.php'>panel</a></li>
-                <li><a class='nav-items' href='../productos/productos.php'>productos</a></li>
-                <li><a class='nav-items' href=' '>reportes</a></li>
-                <li><a class='nav-items' href='../acerca/acerca.php'>CRUDs</a></li>
-                <li><a class='nav-items' href='../reseñas/reseñas.php'>reseñas</a></li>";
-        };
-        ?>
+        <li><a id="inicio" class="nav-items" href="../index/index.php">Inicio</a></li>
+        <li><a class="nav-items" href="../productos/productos.php">Carta</a></li>
+        <li><a class="nav-items" href="">Domicilios</a></li>
+        <li><a class="nav-items" href="../reseñas/reseñas.php">Reseñas</a></li>
+        <li><a class="nav-items" href="../acerca/acerca.php">Acerca de</a></li>
       </ul>
     </div>
-    <?php
-    if (!isset($_SESSION["rol"])) {
-      echo
-      "<div class='boton'>
-          <button class='vinculo' onclick=\"location.href='../login/login.php'\">
-              <img src='../img/testp.png' class='perfil'>
-          </button>
-      </div>";
-    } else {
-      echo
-      "<div class='boton'>
-          <a class='vinculo nav-items' href='../login/login.php'>cerrar session</a>
-      </div>";
-    }
-    ?>
+    <div class="boton">
+      <button class="vinculo" onclick="location.href='../login/login.php'"><img src="../img/testp.png" class="perfil"></button>
+    </div>
   </header>
   <section class="principalcarta">
     <div class="filtros p-3">
@@ -110,6 +86,28 @@ $filaprecio = $resultadoprecio->fetch_assoc()
         </div>
         <button type="submit" class="btn btn-warning w-100">Filtrar</button>
       </form>
+      <br>
+
+<button class="btn btn-warning" onclick="abrirCarrito()"
+        data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
+  🛒 Carrito <span id="carrito-count">0</span>
+</button>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Tu carrito</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body" id="carrito-body"></div>
+  <div class="offcanvas-footer p-3">
+    <button class="btn btn-warning w-100" onclick="irAPagar()">Ir a pagar</button>
+  </div>
+</div>
+
+
+
+
+
     </div>
 
     <div class="productos">
@@ -133,9 +131,10 @@ $filaprecio = $resultadoprecio->fetch_assoc()
     </div>
   </footer>
 
-  <script type="module" src="./productos.js"></script>
   <script src="./modalContent.js" type="module"></script>
   <script src="./addToCartComponent.js" type="module"></script>
+  <script src="./productos.js" type="module"></script>
+  <script src="./carrito.js" type="module"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 

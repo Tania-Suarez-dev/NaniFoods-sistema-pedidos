@@ -1,5 +1,7 @@
 
 <?php
+
+require_once "../constants.php";
 $conexion = new mysqli("localhost", "root", "", "nanifoods");
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
@@ -13,7 +15,7 @@ $estrellas = isset($_GET['estrellas']) ? $_GET['estrellas'] : '';
 $precio_min = isset($_GET['precio_min']) ? $_GET['precio_min'] : '';
 $precio_max = isset($_GET['precio max']) ? $_GET['precio max'] : '';
 
-$sql = "select P.*, r.estrellas FROM productos as p LEFT JOIN detalles_pedidos as d on p.codigo = d.id_producto LEFT JOIN resena as r on d.id = r.id_detalles_pedido WHERE 1";
+$sql = "select P.*, avg(r.estrellas) as estrellas FROM productos as p LEFT JOIN detalles_pedidos as d on p.codigo = d.id_producto LEFT JOIN resena as r on d.id = r.id_detalles_pedido WHERE 1";
 if ($search != '') {
     $sql .= " AND (p.nombre LIKE '%$search%' 
             OR p.descripcion LIKE '%$search%' 
@@ -36,13 +38,19 @@ if (!empty($_GET["precio_max"])) {
     $precio_max = intval($_GET['precio_max']);
     $sql .= " AND p.precio <= $precio_max";
 }
+$sql .= " group by p.codigo";
 
 $resultado = $conexion->query($sql) or die("Error en la consulta: " . $conexion->error);
 
 $data = [];
 if ($resultado && $resultado->num_rows > 0) {
     $data = $resultado->fetch_all(MYSQLI_ASSOC);
+    foreach ($data as &$row) {
+        $row["id"] = $row["codigo"];
+        unset($row["codigo"]);
+        $row["imagen"] = $BASE_URL . $row["imagen"];
+    }
 }
 
 header('Content-Type: application/json; charset=utf-8');
-echo json_encode($data, JSON_UNESCAPED_UNICODE);
+echo json_encode($data);

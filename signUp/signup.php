@@ -1,10 +1,10 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $host = "localhost";
-    $usuario = "root";
-    $bd = "nanifoods";
+    $usuario ="root";
+    $bd= "nanifoods";
     $conn = new mysqli("$host", "$usuario", "", "$bd");
-
+    
     $nombre = $_POST["nombre"];
     $telefono = $_POST["telefono"];
     $id = $_POST["id"];
@@ -16,38 +16,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo_repetida->bind_param("s", $email);
     $correo_repetida->execute();
     $correo_repetida->store_result();
-    if ($correo_repetida->num_rows > 0) {
-        $correomalo = "<div class='alert alert-danger' role='alert'>el correo ya existe</div>";
-        $correo_repetida->close();
+if ($correo_repetida->num_rows > 0){
+            $correomalo ="<div class='alert alert-danger' role='alert'>el correo ya existe</div>";
+            $correo_repetida->close();
+}
+else{
+$hash = password_hash($contrasena, PASSWORD_DEFAULT);
+
+    $consulta = $conn->prepare("insert into usuarios values (NULL,?,?,?,?,?,'user',?)");
+    $consulta->bind_param("ssissi", $nombre, $email, $telefono, $fechaNacimiento,$hash,$id);
+    $consulta->execute();
+    $consulta->store_result();
+
+    $conn->query($consulta);
+    $ultimo_id = $conn->insert_id; 
+    session_start();
+    $result = $conn->query("SELECT id, rol, nombre FROM usuarios WHERE id = $ultimo_id");
+    if ($result && $fila = mysqli_fetch_assoc($result)) {
+        $_SESSION["id"] = $fila['id'];
+        $_SESSION["rol"] = $fila['rol'];
+        $_SESSION["usuario"] = $fila['nombre']; 
+        header("Location: ../index/index.php");
+        exit;
     } else {
-        $hash = password_hash($contrasena, PASSWORD_DEFAULT);
-
-        $consulta = $conn->prepare("insert into usuarios values (NULL,?,?,?,?,?,'user',?)");
-        $consulta->bind_param("ssissi", $nombre, $email, $telefono, $fechaNacimiento, $hash, $id);
-        $consulta->execute();
-        $consulta->store_result();
-
-        $conn->query($consulta);
-        $ultimo_id = $conn->insert_id;
-        session_start();
-        $result = $conn->query("SELECT id, rol, nombre FROM usuarios WHERE id = $ultimo_id");
-        if ($result && $fila = mysqli_fetch_assoc($result)) {
-            $_SESSION["id"] = $fila['id'];
-            $_SESSION["rol"] = $fila['rol'];
-            $_SESSION["usuario"] = $fila['nombre'];
-            header("Location: ../index/index.php");
-            exit;
-        } else {
-            echo "Usuario no encontrado o error en la consulta.";
-        }
+        echo "Usuario no encontrado o error en la consulta.";
     }
 }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
+    
+    <head>
+        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./estilossignup.css" rel="stylesheet">
     <link rel="stylesheet" href="../index/estiloindex.css">
@@ -58,21 +60,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="../index/index.php">
-                <img src="../img/logo.png" alt="Logo" class="logo">
-            </a>
-        </div>
-        <div class="navegador">
-            <ul>
-                <li><a id="inicio" class="nav-items" href="../index/index.php">Inicio</a></li>
-                <li><a class="nav-items" href="../productos/productos.php">Carta</a></li>
-                <li><a class="nav-items" href="">Domicilios</a></li>
-                <li><a class="nav-items" href="../reseñas/reseñas.php">Reseñas</a></li>
-                <li><a class="nav-items" href="../acerca/acerca.php">Acerca de</a></li>
-            </ul>
-        </div>
+<header>
+   <div class="logo">
+    <a href="../index/index.php">
+        <img src="../img/logo.png" alt="Logo" class="logo">
+    </a>
+</div>
+    <div class="navegador">
+      <ul>
+        <li><a id="inicio" class="nav-items" href="../index/index.php">Inicio</a></li>
+        <li><a class="nav-items" href="../productos/productos.php">Carta</a></li>
+        <li><a class="nav-items" href="">Domicilios</a></li>
+        <li><a class="nav-items" href="../reseñas/reseñas.php">Reseñas</a></li>
+        <li><a class="nav-items" href="../acerca/acerca.php">Acerca de</a></li>
+      </ul>
+    </div>
     </header>
     <section class="principalLogin">
         <div class="login">
@@ -81,9 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <form method="post" action="signup.php">
                 <div class="formulario">
-                    <?php if (isset($correomalo)) {
-                        echo "$correomalo";
-                    } ?>
+                    <?php if (isset($correomalo)){ echo "$correomalo";}?>
                     <div>
                         <input type="text" class="campotext" placeholder="nombre y apellidos" name="nombre" required>
                     </div>

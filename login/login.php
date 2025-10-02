@@ -1,43 +1,38 @@
 <?php
 session_start();
-if (isset($_SESSION["rol"])) {
-    session_unset();
-    session_destroy();
-    header("location: ../index/index.php");
-    exit;
-}
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $host = "localhost";
-    $usuario = "root";
-    $bd = "nanifoods";
+    $usuario ="root";
+    $bd= "nanifoods";
     $conn = new mysqli("$host", "$usuario", "", "$bd");
-
-    $conn->set_charset("utf8mb4");
+    
+$conn->set_charset("utf8mb4");
     $email = $_POST["email"];
     $contrasena = $_POST["contrasena"];
 
-    $email = mysqli_real_escape_string($conn, $email);
-    $contrasena = mysqli_real_escape_string($conn, $contrasena);
+$email = mysqli_real_escape_string($conn, $email);
+$contrasena = mysqli_real_escape_string($conn, $contrasena);
 
     $consulta = $conn->prepare("select * from usuarios where correo =  ?");
-    $consulta->bind_param("s", $email);
+    $consulta->bind_param("s", $email );
     $consulta->execute();
     $result  = $consulta->get_result();
 
-    if ($fila = $result->fetch_assoc()) {
-        if (password_verify($contrasena, $fila['contraseña'])) {
+if ($fila =$result ->fetch_assoc()) {
+        if (password_verify($contrasena, $fila['contraseña'])){
             $_SESSION["id"] = $fila['id'];
             $_SESSION["rol"] = $fila['rol'];
-            $_SESSION["usuario"] = $fila['nombre'];
+            $_SESSION["usuario"] = $fila['nombre']; 
             header("location: ../index/index.php");
-        } else {
-            $nocontrasena = "<div class='alert alert-danger' role='alert'>La contraseña es invalida</div>";
         }
-    } else {
-        $nocorreo = "<div class='alert alert-warning'>El correo no está registrado</div>";
+        else{
+            $nocontrasena ="<div class='alert alert-danger' role='alert'>La contraseña es invalida</div>";
+        }   
+    }
+    else{
+            $nocorreo = "<div class='alert alert-warning'>El correo no está registrado</div>";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -54,26 +49,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="../index/index.php">
-                <img src="../img/logo.png" alt="Logo" class="logo">
-            </a>
-        </div>
-        <div class="navegador">
-            <ul>
-                <li><a id="inicio" class="nav-items" href="../index/index.php">Inicio</a></li>
-                <li><a class="nav-items" href="../productos/productos.php">Carta</a></li>
-                <li><a class="nav-items" href="">Domicilios</a></li>
-                <li><a class="nav-items" href="../reseñas/reseñas.php">Reseñas</a></li>
-                <li><a class="nav-items" href="../acerca/acerca.php">Acerca de</a></li>
-            </ul>
-        </div>
+  <header>
+   <div class="logo">
+    <a href="../index/index.php">
+        <img src="../img/logo.png" alt="Logo" class="logo">
+    </a>
+</div>
+    <div class="navegador">
+      <ul>
+        <li><a id="inicio" class="nav-items" href="../index/index.php">Inicio</a></li>
+        <li><a class="nav-items" href="../productos/productos.php">Carta</a></li>
+        <li><a class="nav-items" href="">Domicilios</a></li>
+        <li><a class="nav-items" href="../reseñas/reseñas.php">Reseñas</a></li>
+        <li><a class="nav-items" href="../acerca/acerca.php">Acerca de</a></li>
+      </ul>
+    </div>
     </header>
     <section class="principalLogin">
         <div class="login">
             <h1 class="textologin">Login</h1>
-            <form action="login.php" , method="post">
+            <form action="login.php", method="post">
                 <div class="formulario">
                     <div class="correo">
                         <input type="email" class="campotext" placeholder="Correo electronico" name="email" required>
@@ -91,12 +86,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             ¿No tienes una cuenta?
                             <a href="../signUp/signup.php">Registrate acá</button>
                         </div>
-                        <?php if (isset($nocontrasena)) {
-                            echo "$nocontrasena";
-                        } ?>
-                        <?php if (isset($nocorreo)) {
-                            echo "$nocorreo";
-                        } ?>
+            <?php if (isset($nocontrasena)){ echo "$nocontrasena";}?>
+            <?php if (isset($nocorreo)){ echo "$nocorreo";}?>
                     </div>
             </form>
         </div>

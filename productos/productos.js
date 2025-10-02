@@ -1,4 +1,4 @@
-
+import { modalContent } from "./modalContent.js";
 async function cargarProductos() {
   const res = await fetch("infoproductos.php"); // <-- devuelve JSON
   const data = await res.json();

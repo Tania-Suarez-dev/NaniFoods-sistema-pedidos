@@ -59,3 +59,8 @@ body {
     margin: 10px;
     width: 50%;
 }
+
+#offcanvasCarrito {
+  width: 33vw !important; 
+  max-width: 500px;    
+}

@@ -1,5 +1,7 @@
 
+import { addToCartComponent } from "./addToCartComponent.js";
 export function modalContent(product) {
+  console.log("Producto recibido en modalContent:", product);
   return `
     <div class="modal-content">
       <div class="modal-header">
@@ -20,10 +22,12 @@ export function modalContent(product) {
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          ${addToCartComponent()}
+          ${addToCartComponent(product)}
+
       </div>
     </div>
     `;
 }
 
 window.modalContent = modalContent;
+

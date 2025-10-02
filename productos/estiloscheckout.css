@@ -1,0 +1,27 @@
+.checkout-container {
+    background-color: var(--color5);
+}
+
+.checkout-container {
+  max-width: 900px;
+  margin: auto;
+  background: var(--color3);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.checkout-header {
+  background-color: #ffc107; 
+  padding: 15px;
+  border-radius: 5px;
+}
+.product-card {
+  order: 1px solid #dee2e6;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.total-section {
+  background-color: #fff3cd; 
+  padding: 15px;
+  border-radius: 5px;
+}

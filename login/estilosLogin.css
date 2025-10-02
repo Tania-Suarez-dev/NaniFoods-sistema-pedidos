@@ -10,13 +10,13 @@ body {
     justify-content: center;
     align-items: center;
     background-image: url("../img/test1.jpg");
-}
 
-ul {
+}
+ul{
     padding-left: 2rem;
 }
 
-.login {
+.login{
     border: 3px solid var(--color1);
     border-radius: 10px;
     width: 300px;
@@ -31,18 +31,18 @@ ul {
     border: 5px solid var(--color1);
 }
 
-.alert {
-    padding: 15px 20px;
-    margin-top: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-size: 16px;
+.alert{
+  padding: 15px 20px;
+  margin-top: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 16px;
 }
 
 .alert-danger {
-    color: #842029;
-    background-color: #f8d7da;
-    border-color: #f5c2c7;
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
 }
 
 .lineatexto {
@@ -74,7 +74,8 @@ ul {
 
 .campotext:focus {
     transition: 0.5s;
-    background-color: var(--color6);
+    opacity: 65%;
+    background-color: var(--color2);
 }
 
 .formulario {
