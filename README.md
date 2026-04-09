@@ -17,7 +17,7 @@ Funcionalidades:
 Tecnologías utilizadas:
 
 - PHP  
-- MySQL (si usaste base de datos)  
+- MySQL 
 - HTML  
 - CSS  
 - Bootstrap  
