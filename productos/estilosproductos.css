@@ -4,10 +4,11 @@ body {
     width: 100;
     min-height: 100%;
     overflow-y: auto;
-    overflow-x:hidden !important;
+    overflow-x: hidden !important;
 }
 
 .principalcarta {
+    min-height: 85vh;
     display: flex;
     width: 100vw;
     align-items: flex-start;
@@ -35,15 +36,6 @@ body {
     overflow-y: visible;
 }
 
-.card {
-    margin: 15px;
-}
-
-.row {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-}
-
 #modal-product-content {
     display: flex !important;
     flex-direction: row !important;
@@ -61,6 +53,22 @@ body {
 }
 
 #offcanvasCarrito {
-  width: 33vw !important; 
-  max-width: 500px;    
+    z-index: 99999999;
+    width: 33vw !important;
+    max-width: 500px;
+}
+
+.multiline-truncate {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    /* Número de líneas a mostrar */
+}
+
+.img-fixed {
+    width: auto;
+    height: 250px;
+    object-fit: cover;
 }

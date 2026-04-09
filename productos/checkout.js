@@ -36,7 +36,9 @@ function mostrarCarritoCheckout() {
     document.getElementById("total-carrito").innerText = total.toLocaleString();
 }
 
-function confirmarPedido() {
+function confirmarPedido(e) {
+    e.preventDefault();
+
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     if (carrito.length === 0) {
@@ -44,13 +46,40 @@ function confirmarPedido() {
         return;
     }
 
-    fetch("procesarPedido.php", {
+    const direccion = document.getElementById("direccion").value.trim();
+    const metodo_pago = document.getElementById("metodo-pago").value;
+    const observaciones = document.getElementById("observaciones").value.trim();
+
+    if (!direccion || !metodo_pago) {
+        alert("Por favor completa la dirección y el método de pago.");
+        return;
+    }
+
+    const datos = { carrito, direccion, metodo_pago, observaciones };
+
+
+    console.log("Enviando al servidor:", datos);
+
+    fetch("procesarpedido.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ carrito })
+        body: JSON.stringify(datos)
     })
-    .then(res => res.json())
-    .then(data => {
+    .then(async res => {
+        const texto = await res.text(); 
+        console.log(" Respuesta cruda del servidor:", texto);
+
+        let data;
+        try {
+            data = JSON.parse(texto);
+        } catch (err) {
+            console.error(" Error al parsear JSON:", err);
+            alert("Error inesperado en la respuesta del servidor. Revisa la consola.");
+            return;
+        }
+
+        console.log(" Respuesta interpretada:", data);
+
         if (data.success) {
             localStorage.removeItem("carrito");
             alert("Pedido confirmado correctamente!");
@@ -59,8 +88,15 @@ function confirmarPedido() {
             alert("Error: " + data.message);
         }
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+        console.error(" Error de conexión o fetch:", err);
+        alert("Ocurrió un error al procesar el pedido. Revisa la consola (F12).");
+    });
 }
 
-window.addEventListener("DOMContentLoaded", mostrarCarritoCheckout);
-document.getElementById("confirmar-pedido").addEventListener("click", confirmarPedido);
+window.addEventListener("DOMContentLoaded", () => {
+    mostrarCarritoCheckout();
+    const boton = document.getElementById("confirmar-pedido");
+    boton.replaceWith(boton.cloneNode(true)); 
+    document.getElementById("confirmar-pedido").addEventListener("click", confirmarPedido);
+});

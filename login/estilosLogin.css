@@ -3,6 +3,10 @@ body {
     padding: 0;
 }
 
+.boton {
+    display: none !important;
+}
+
 .principalLogin {
     width: 100%;
     height: 500px;
@@ -10,13 +14,13 @@ body {
     justify-content: center;
     align-items: center;
     background-image: url("../img/test1.jpg");
-
 }
-ul{
+
+ul {
     padding-left: 2rem;
 }
 
-.login{
+.login {
     border: 3px solid var(--color1);
     border-radius: 10px;
     width: 300px;
@@ -31,18 +35,18 @@ ul{
     border: 5px solid var(--color1);
 }
 
-.alert{
-  padding: 15px 20px;
-  margin-top: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  font-size: 16px;
+.alert {
+    padding: 15px 20px;
+    margin-top: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
 .alert-danger {
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
 }
 
 .lineatexto {

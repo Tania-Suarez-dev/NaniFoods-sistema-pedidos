@@ -5,12 +5,12 @@ require_once("../utils/storage.php");
 require_once("../constants.php");
 // Si no hay sesión
 if (!isset($_SESSION["id"])) {
-    header("Location: login.php");
+    header("Location: ../login/login.php");
     exit();
 }
 // Si el rol no es admin
 if ($_SESSION["rol"] !== "admin") {
-    header("Location: index.php");
+    header("Location: ../index/index.php");
     exit();
 }
 $conexion = connect();

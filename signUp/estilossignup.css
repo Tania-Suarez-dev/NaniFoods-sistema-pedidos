@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -6,6 +7,10 @@ body, html {
 
 * {
     box-sizing: border-box;
+}
+
+.boton {
+    display: none;
 }
 
 .principalLogin {
@@ -20,9 +25,10 @@ body, html {
     background-repeat: no-repeat;
 }
 
-ul{
+ul {
     padding-left: 2rem;
 }
+
 .login {
     margin: auto;
     border: 3px solid var(--color1);
@@ -33,6 +39,7 @@ ul{
     background-color: var(--color3);
     overflow-y: auto;
 }
+
 .login:focus-within {
     transition: 0.1s;
     border: 5px solid var(--color1);
@@ -106,17 +113,16 @@ ul{
     padding-left: 5%;
 }
 
-
-.alert{
-  padding: 15px 20px;
-  margin-top: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  font-size: 16px;
+.alert {
+    padding: 15px 20px;
+    margin-top: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
 .alert-danger {
-  color: #842029;
-  background-color: #f8d7da;
-  border-color: #f5c2c7;
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
 }

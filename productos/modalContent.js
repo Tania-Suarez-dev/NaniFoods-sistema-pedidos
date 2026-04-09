@@ -21,8 +21,8 @@ export function modalContent(product) {
           </div>
       </div>
       <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          ${addToCartComponent(product)}
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+          ${addToCartComponent(product, true)}
 
       </div>
     </div>

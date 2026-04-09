@@ -1,38 +1,39 @@
-.principal{
-    display: flex;
+html,
+body {
+    height: auto;
+    width: 100;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden !important;
 }
 
-.filtros{
-    height: 85vh;
+.principalResena {
+    min-height: 85vh;
+    display: flex;
+    width: 100vw;
+    align-items: flex-start;
+    height: auto;
+    overflow: visible;
+    align-items: stretch;
+}
+
+.filtros {
     width: 20%;
     background-color: var(--color4);
     box-shadow: 1px 0px 5px var(--color4);
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-}
-.filtro{
-    margin: 20px;
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-    padding: 10px;
-    background-color: var(--color3);
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    height: 40px;
-    font-size: 15px;
+    height: auto;
 }
 
-.apartado{
-    display: block;
-    margin: 25px;
-    width: 13vw;
-}
-.reseñas{
-    height: 85vh;
-    width: 80%;
+.reseñas {
     background-color: var(--color5);
+    width: 80%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    overflow-y: visible;
 }
 
 .reseñas {
@@ -41,7 +42,7 @@
     background-color: var(--color5);
 }
 
-.boton_reseña{
+.boton_reseña {
     height: 85px;
     width: 150px;
     border-radius: 10px;

@@ -16,7 +16,3 @@ function saveImage($image, $tmp_name, $folder)
     $resultado = move_uploaded_file($tmp_name, $carpeta_destino);
     return $resultado ? "img/$folder/$uuid" . "_" . "$nombre_limpio" : null;
 }
-////tod0: guardar
-//ALTER TABLE productos
-//ADD COLUMN activo TINYINT(1) NOT NULL DEFAULT 1,
-//ADD COLUMN eliminado TINYINT(1) NOT NULL DEFAULT 0;

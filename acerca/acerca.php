@@ -1,3 +1,8 @@
+<?php
+require_once("../utils/header.php");
+require_once("../utils/footer.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,55 +19,15 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="../index/index.php">
-                <img src="../img/logo.png" alt="Logo" class="logo">
-            </a>
-        </div>
-        <div class="navegador">
-            <ul>
-                <?php
-                if (!isset($_SESSION["rol"]) || $_SESSION["rol"] !== "admin") {
-                    echo
-                    "<li><a id='inicio' class='nav-items' href='../index/index.php'>Inicio</a></li>
-                <li><a class='nav-items' href='../productos/productos.php'>Carta</a></li>
-                <li><a class='nav-items' href=''>Domicilios</a></li>
-                <li><a class='nav-items' href='../reseñas/reseñas.php'>Reseñas</a></li>
-                <li><a class='nav-items' href='../acerca/acerca.php'>Acerca de</a></li>";
-                } elseif ($_SESSION["rol"] === "admin") {
-                    echo
-                    "<li><a id='inicio' class='nav-items' href='../index/index.php'>panel</a></li>
-                <li><a class='nav-items' href='../productos/productos.php'>productos</a></li>
-                <li><a class='nav-items' href=' '>reportes</a></li>
-                <li><a class='nav-items' href='../acerca/acerca.php'>CRUDs</a></li>
-                <li><a class='nav-items' href='../reseñas/reseñas.php'>reseñas</a></li>";
-                };
-                ?>
-            </ul>
-        </div>
-        <?php
-        if (!isset($_SESSION["rol"])) {
-            echo
-            "<div class='boton'>
-                    <button class='vinculo' onclick=\"location.href='../login/login.php'\">
-                        <img src='../img/testp.png' class='perfil'>
-                    </button>
-                </div>";
-        } else {
-            echo
-            "<div class='boton'>
-                    <a class='vinculo nav-items' href='../login/login.php'>cerrar session</a>
-                </div>";
-        }
-        ?>
-    </header>
+    <?php
+    showheader()
+    ?>
     <section class="principalAcerca">
         <div class="card" style="width: 18rem;">
-            <img src="../img/uno.jpg" class="card-img-top" alt="...">
+            <img src="../img/perfiles_acerca.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Brayan Reyes</h5>
-                <p class="card-text">Líder estratégico con experiencia en gestión empresarial y toma de decisiones. Apasionado por la innovación y el crecimiento.</p>
+                <p class="card-text">Líder estratégico con enfoque en gestión empresarial y toma de decisiones. Apasionado por la innovación y el crecimiento.</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">director ejecutivo</li>
@@ -72,20 +37,20 @@
             </div>
         </div>
         <div class="card" style="width: 18rem;">
-            <img src="../img/uno.jpg" class="card-img-top" alt="...">
+            <img src="../img/perfiles_acerca.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Hamilton Soriano</h5>
                 <p class="card-text">Apasionado por transformar ideas en experiencias impactantes mediante la combinación de arte, tecnología y estrategia</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">director tecnico de creatividad (señor pereza)</li>
+                <li class="list-group-item">director tecnico de creatividad</li>
             </ul>
             <div class="card-body">
                 <a href="#" class="card-link">Contacto</a>
             </div>
         </div>
         <div class="card" style="width: 18rem;">
-            <img src="../img/uno.jpg" class="card-img-top" alt="...">
+            <img src="../img/perfiles_acerca.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Tania Suarez</h5>
                 <p class="card-text">Liderando la planificación y ejecución estratégica para el crecimiento y desarrollo eficiente de la empresa</p>
@@ -98,31 +63,22 @@
             </div>
         </div>
         <div class="card" style="width: 18rem;">
-            <img src="../img/uno.jpg" class="card-img-top" alt="...">
+            <img src="../img/perfiles_acerca.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Laura Escarraga</h5>
                 <p class="card-text">Comprometida con la excelencia visual y la innovación para fortalecer la identidad y presencia de la empresa</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">directora de diseño grafico (señora no viene)</li>
+                <li class="list-group-item">directora de diseño grafico</li>
             </ul>
             <div class="card-body">
                 <a href="#" class="card-link">Contacto</a>
             </div>
         </div>
     </section>
-    <footer>
-        <div>
-            <img src="../img/wsp.png" alt="" width="50px" height="50px">
-            <img src="../img/fb.png" alt="" width="48px" height="48px">
-        </div>
-        <div class="flink">
-            www.NaniFoods.com.co
-        </div>
-        <div>
-            <img src="../img/logo.png" alt="" width="70px" height="70px">
-        </div>
-    </footer>
+    <?php
+    showfooter();
+    ?>
 </body>
 
 </html>

@@ -1,38 +1,8 @@
 <?php
 session_start();
-if ($_SERVER["REQUEST_METHOD"]=="POST"){
-    $host = "localhost";
-    $usuario ="root";
-    $bd= "nanifoods";
-    $conn = new mysqli("$host", "$usuario", "", "$bd");
-    
-$conn->set_charset("utf8mb4");
-    $email = $_POST["email"];
-    $contrasena = $_POST["contrasena"];
+require_once("../utils/header.php");
+require_once("../utils/footer.php");
 
-$email = mysqli_real_escape_string($conn, $email);
-$contrasena = mysqli_real_escape_string($conn, $contrasena);
-
-    $consulta = $conn->prepare("select * from usuarios where correo =  ?");
-    $consulta->bind_param("s", $email );
-    $consulta->execute();
-    $result  = $consulta->get_result();
-
-if ($fila =$result ->fetch_assoc()) {
-        if (password_verify($contrasena, $fila['contraseña'])){
-            $_SESSION["id"] = $fila['id'];
-            $_SESSION["rol"] = $fila['rol'];
-            $_SESSION["usuario"] = $fila['nombre']; 
-            header("location: ../index/index.php");
-        }
-        else{
-            $nocontrasena ="<div class='alert alert-danger' role='alert'>La contraseña es invalida</div>";
-        }   
-    }
-    else{
-            $nocorreo = "<div class='alert alert-warning'>El correo no está registrado</div>";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -49,26 +19,13 @@ if ($fila =$result ->fetch_assoc()) {
 </head>
 
 <body>
-  <header>
-   <div class="logo">
-    <a href="../index/index.php">
-        <img src="../img/logo.png" alt="Logo" class="logo">
-    </a>
-</div>
-    <div class="navegador">
-      <ul>
-        <li><a id="inicio" class="nav-items" href="../index/index.php">Inicio</a></li>
-        <li><a class="nav-items" href="../productos/productos.php">Carta</a></li>
-        <li><a class="nav-items" href="">Domicilios</a></li>
-        <li><a class="nav-items" href="../reseñas/reseñas.php">Reseñas</a></li>
-        <li><a class="nav-items" href="../acerca/acerca.php">Acerca de</a></li>
-      </ul>
-    </div>
-    </header>
+    <?php
+    showheader();
+    ?>
     <section class="principalLogin">
         <div class="login">
             <h1 class="textologin">Login</h1>
-            <form action="login.php", method="post">
+            <form action="./infologin.php" method="post">
                 <div class="formulario">
                     <div class="correo">
                         <input type="email" class="campotext" placeholder="Correo electronico" name="email" required>
@@ -84,28 +41,20 @@ if ($fila =$result ->fetch_assoc()) {
                         <button id="submit" type="submit" class="botonlog">ingresar</button>
                         <div class="vinculo-login">
                             ¿No tienes una cuenta?
-                            <a href="../signUp/signup.php">Registrate acá</button>
+                            <a href="../signUp/signup.php">Registrate acá</a>
                         </div>
-            <?php if (isset($nocontrasena)){ echo "$nocontrasena";}?>
-            <?php if (isset($nocorreo)){ echo "$nocorreo";}?>
+                        <?php if (isset($_SESSION["error"])) {
+                            echo "$_SESSION[error]";
+                            unset($_SESSION["error"]);
+                        };
+                        ?>
                     </div>
             </form>
         </div>
     </section>
-    <footer>
-        <div>
-            <img src="../img/wsp.png" alt="" width="50px" height="50px">
-            <img src="../img/fb.png" alt="" width="48px" height="48px">
-        </div>
-        <div class="flink">
-            www.NaniFoods.com.co
-        </div>
-        <div>
-            <img src="../img/logo.png" alt="" width="70px" height="70px">
-        </div>
-    </footer>
-    <script src="./index.js"></script>
-
+    <?php
+    showfooter();
+    ?>
 </body>
 
 </html>

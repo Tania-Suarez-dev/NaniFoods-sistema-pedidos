@@ -1,10 +1,11 @@
 <?php
 session_start();
-$host = "localhost";
-$usuario = "root";
-$bd = "nanifoods";
-$conexion = new mysqli("$host", "$usuario", "", "$bd");
-$categoria = "select distinct categoria from productos where 1=1";
+require_once("../utils/header.php");
+require_once("../utils/footer.php");
+require_once("../connection/connection.php");
+$conexion = connect();
+
+$categoria = "select distinct categoria from productos";
 $resultadocategoria = $conexion->query($categoria) or die("Error en la consulta: " . $conexion->error);
 $precio = "select min(precio) AS precio_min, max(precio) AS precio_max FROM productos";
 $resultadoprecio = $conexion->query($precio) or die("Error en la consulta: " . $conexion->error);
@@ -28,27 +29,11 @@ $filaprecio = $resultadoprecio->fetch_assoc()
 </head>
 
 <body>
- <header>
-   <div class="logo">
-    <a href="../index/index.php">
-        <img src="../img/logo.png" alt="Logo" class="logo">
-    </a>
-</div>
-    <div class="navegador">
-      <ul>
-        <li><a id="inicio" class="nav-items" href="../index/index.php">Inicio</a></li>
-        <li><a class="nav-items" href="../productos/productos.php">Carta</a></li>
-        <li><a class="nav-items" href="">Domicilios</a></li>
-        <li><a class="nav-items" href="../reseñas/reseñas.php">Reseñas</a></li>
-        <li><a class="nav-items" href="../acerca/acerca.php">Acerca de</a></li>
-      </ul>
-    </div>
-    <div class="boton">
-      <button class="vinculo" onclick="location.href='../login/login.php'"><img src="../img/testp.png" class="perfil"></button>
-    </div>
-  </header>
+  <?php
+  showheader();
+  ?>
   <section class="principalcarta">
-    <div class="filtros p-3">
+    <div id="filtros" class="filtros p-3 pt-5">
       <form method="GET" action="productos.php">
         <input type="text" name="search" placeholder="Buscar..." class="form-control filtro mb-3"
           value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
@@ -63,7 +48,7 @@ $filaprecio = $resultadoprecio->fetch_assoc()
           } ?>
         </select>
 
-        <div class="row mb-3">
+        <div class="mb-3">
           <div class=" form-control form-check form-switch">
             <input class="form-check-input" type="checkbox" name="ofertas" role="switch" id="flexSwitchCheckChecked" checked>
             <label class="form-check-label" for="flexSwitchCheckChecked">ver ofertas</label>
@@ -76,7 +61,7 @@ $filaprecio = $resultadoprecio->fetch_assoc()
           <?php endfor; ?>
         </select>
 
-        <div class="row mb-3">
+        <div class="row mb-3 g-1">
           <div class="col">
             <input type="number" name="precio_min" class="form-control" placeholder="<?= $filaprecio["precio_min"] ?>">
           </div>
@@ -88,21 +73,21 @@ $filaprecio = $resultadoprecio->fetch_assoc()
       </form>
       <br>
 
-<button class="btn btn-warning" onclick="abrirCarrito()"
+      <button class="btn btn-warning" onclick="abrirCarrito()"
         data-bs-toggle="offcanvas" data-bs-target="#offcanvasCarrito">
-  🛒 Carrito <span id="carrito-count">0</span>
-</button>
+        🛒 Carrito <span id="carrito-count">0</span>
+      </button>
 
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title">Tu carrito</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-  </div>
-  <div class="offcanvas-body" id="carrito-body"></div>
-  <div class="offcanvas-footer p-3">
-    <button class="btn btn-warning w-100" onclick="irAPagar()">Ir a pagar</button>
-  </div>
-</div>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrito">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Tu carrito</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body" id="carrito-body"></div>
+        <div class="offcanvas-footer p-3">
+          <button class="btn btn-warning w-100" onclick="irAPagar()">Ir a pagar</button>
+        </div>
+      </div>
 
 
 
@@ -111,26 +96,16 @@ $filaprecio = $resultadoprecio->fetch_assoc()
     </div>
 
     <div class="productos">
-      <div class="row justify-content-center" id="productos"></div>
+      <div class="row justify-content-evenly g-1 mt-4" id="productos"></div>
 
       <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg" id="modal-dialog"></div>
       </div>
     </div>
   </section>
-  <footer>
-    <div>
-      <img src="../img/wsp.png" alt="" width="50px" height="50px">
-      <img src="../img/fb.png" alt="" width="48px" height="48px">
-    </div>
-    <div class="flink">
-      www.NaniFoods.com.co
-    </div>
-    <div>
-      <img src="../img/logo.png" alt="" width="70px" height="70px">
-    </div>
-  </footer>
-
+  <?php
+  showfooter();
+  ?>
   <script src="./modalContent.js" type="module"></script>
   <script src="./addToCartComponent.js" type="module"></script>
   <script src="./productos.js" type="module"></script>
